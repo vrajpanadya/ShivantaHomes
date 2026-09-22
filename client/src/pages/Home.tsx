@@ -272,7 +272,7 @@ export default function Home() {
             <h2 className="title" data-split>{overview.heading}</h2>
             <p className="lead" data-reveal style={{ marginTop: 18, color: 'var(--muted)', lineHeight: 1.85, fontSize: 16 }}>{overview.description}</p>
             <div className="stats" data-stagger>
-              {overview.stats.map((s) => (
+              {(overview.stats ?? []).map((s) => (
                 <div className="stat" key={s.label} data-reveal>
                   <b data-count={s.value}>{s.value}</b>
                   <span>{s.label}</span>
@@ -282,7 +282,7 @@ export default function Home() {
           </div>
           <div>
             <ul className="highlights" data-stagger>
-              {overview.highlights.map((h) => (
+              {(overview.highlights ?? []).map((h) => (
                 <li key={h} data-reveal><Icon name="check" size={17} /> {h}</li>
               ))}
             </ul>
@@ -508,7 +508,7 @@ export default function Home() {
                 {location.address}
               </p>
               <div className="landmarks" data-stagger>
-                {location.landmarks.map((l) => (
+                {(location.landmarks ?? []).map((l) => (
                   <div className="landmark" key={l.name} data-reveal><span>{l.name}</span><span>{l.distance}</span></div>
                 ))}
               </div>
