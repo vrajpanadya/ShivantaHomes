@@ -70,7 +70,8 @@ export function usePublic<T>(path: string, fallback: T) {
     setLoading(true);
     fetchPublic<T>(path).then((d) => {
       if (!alive) return;
-      if (d !== null && d !== undefined) setData(d);
+            const shapeOk = !Array.isArray(fallback) || Array.isArray(d);
+      if (d !== null && d !== undefined && shapeOk) setData(d);
       setLoading(false);
     });
     return () => {
