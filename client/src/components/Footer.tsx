@@ -104,10 +104,38 @@ export default function Footer() {
             ))}
           </div>
           <div>
-            <h4>Contact</h4>
-            <a href={`tel:${s.phone.replace(/\s/g, '')}`}><Icon name="phone" size={13} style={{ display: 'inline', marginRight: 8 }} />{s.phone}</a>
-            <a href={s.mapsLink} target="_blank" rel="noreferrer"><Icon name="pin" size={13} style={{ display: 'inline', marginRight: 8 }} />{s.address}</a>
-            <a href="#contact" onClick={go('#contact')}><Icon name="calendar" size={13} style={{ display: 'inline', marginRight: 8 }} />Book a site visit</a>
+           <h4>Contact</h4>
+
+{s.phone && (
+  <a href={`tel:${s.phone.replace(/\s/g, '')}`}>
+    <Icon
+      name="phone"
+      size={13}
+      style={{ display: 'inline', marginRight: 8 }}
+    />
+    {s.phone}
+  </a>
+)}
+
+{s.mapsLink && (
+  <a href={s.mapsLink} target="_blank" rel="noreferrer">
+    <Icon
+      name="pin"
+      size={13}
+      style={{ display: 'inline', marginRight: 8 }}
+    />
+    {s.address ?? ''}
+  </a>
+)}
+
+<a href="#contact" onClick={go('#contact')}>
+  <Icon
+    name="calendar"
+    size={13}
+    style={{ display: 'inline', marginRight: 8 }}
+  />
+  Book a site visit
+</a>
           </div>
         </div>
         <div className="footer-bottom">
