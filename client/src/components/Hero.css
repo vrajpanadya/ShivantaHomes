@@ -1,0 +1,113 @@
+/* ================= Hero — "Architectural Blueprint → Reality" ================= */
+.hero {
+  position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden;
+  color: #fff;
+  /* warm ivory canvas visible before / around the reveal mask */
+  background: radial-gradient(150% 120% at 50% 45%, #fbf8f2 0%, var(--bg) 50%, #f1eae0 100%);
+}
+
+/* ---- layered background: scroll-zoom wrapper > reveal mask > settle wrapper > photo ---- */
+.hero-bg { position: absolute; inset: 0; }
+@media (min-width: 821px) { .hero-bg { will-change: transform; } }
+.hero-plate { position: absolute; inset: 0; overflow: hidden; }
+.hero.hero-nophoto .hero-plate, .hero.hero-late .hero-plate { background: #1f1814; }
+.hero-zoom { position: absolute; inset: 0; }
+.hero-zoom img, .hero-zoom video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 42%;
+}
+@media (max-width: 1020px) { .hero-zoom img, .hero-zoom video { object-position: center 50%; } }
+@media (max-width: 640px) {
+  .hero-zoom img,
+  .hero-zoom video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 42% center;
+  }
+}
+/* readability gradients live inside the mask so they are revealed together with the photograph */
+.hero-plate::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(12, 9, 7, 0.34) 0%, rgba(12, 9, 7, 0.12) 14%, rgba(12, 9, 7, 0) 28%),
+    radial-gradient(120% 95% at 50% 45%, rgba(0, 0, 0, 0) 58%, rgba(10, 8, 6, 0.34) 100%);
+}
+.hero-plate::after {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(62% 52% at 22% 64%, rgba(12, 9, 7, 0.44) 0%, rgba(12, 9, 7, 0) 72%),
+    linear-gradient(180deg, rgba(15, 11, 8, 0.14) 0%, rgba(15, 11, 8, 0.05) 34%, rgba(15, 11, 8, 0.48) 76%, rgba(15, 11, 8, 0.72) 100%);
+}
+
+/* ---- bronze architectural tracing (registered to the photo's cover box by JS) ---- */
+.hero-lines { position: absolute; inset: 0; z-index: 2; opacity: 0; visibility: hidden; pointer-events: none; }
+.hero-blueprint {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible;
+  fill: none; stroke: var(--copper); stroke-linecap: round; stroke-linejoin: round;
+}
+.hero-blueprint path { stroke-width: var(--sw-main, 1.6); }
+.hero-blueprint .bp-thin { stroke-width: var(--sw-thin, 1); stroke: rgba(156, 112, 96, 0.8); }
+.hero-blueprint .bp-guide path { stroke-width: var(--sw-thin, 1); stroke: var(--gold); }
+@media (max-width: 640px) { .hero-blueprint .bp-wing { display: none; } }
+/* thin bronze frame that travels with the expanding reveal mask */
+.hero-frame {
+  position: absolute; inset: 50%; z-index: 3; pointer-events: none;
+  border: 1px solid rgba(156, 112, 96, 0.9); opacity: 0; visibility: hidden;
+}
+
+/* ---- content ---- */
+.hero-content { position: relative; z-index: 2; color: #fff; padding: clamp(96px, 14vh, 150px) 0 clamp(84px, 12vh, 130px); }
+.hero-label {
+  display: inline-flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 24px;
+  text-shadow: 0 1px 14px rgba(10, 7, 5, 0.55), 0 0 2px rgba(10, 7, 5, 0.35);
+}
+.hero-label::before { content: ''; width: 46px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+.hero-title {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(46px, 8.6vw, 118px); line-height: 1.03;
+  letter-spacing: 0.002em; text-wrap: balance; text-shadow: 0 2px 30px rgba(10, 7, 5, 0.35);
+}
+.hero-title .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; user-select: none; -webkit-user-select: none; }
+.hero-title .ch { display: inline-block; white-space: pre; }      /* kerning restored via JS margin-left */
+.hero-title .chi { display: inline-block; transform-origin: 0 100%; backface-visibility: hidden; }
+.hero-kern-probe { position: absolute; left: 0; top: 0; visibility: hidden; white-space: pre; pointer-events: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.hero-accent { display: block; width: 92px; height: 2px; margin: 26px 0 0; background: linear-gradient(90deg, var(--gold), var(--copper) 60%, transparent); transform-origin: left; }
+.hero-desc { max-width: 620px; margin: 24px 0 0; font-size: clamp(15px, 1.35vw, 17.5px); line-height: 1.85; color: rgba(255, 255, 255, 0.9); text-shadow: 0 1px 14px rgba(10, 7, 5, 0.35); }
+
+/* ---- CTAs: bronze fill sweep + moving arrow / fine border + translucent fill ---- */
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 44px; }
+.hero--bare { align-items: flex-end; } /* no text above → the buttons sit low, above the bottom padding */
+.hero-content--bare { padding-bottom: clamp(60px, 9vh, 100px); }
+.hero-content--bare .hero-ctas { margin-top: 0; }
+.hero-ctas .btn { position: relative; overflow: hidden; isolation: isolate; min-height: 42px; padding: 10px 20px; font-size: 12px; letter-spacing: 0.06em; }
+.hero-ctas .btn .cta-arrow { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.hero-ctas .btn:is(:hover, :focus-visible) .cta-arrow { transform: translateX(4px); }
+.hero-ctas .btn-primary { background: linear-gradient(135deg, var(--copper), var(--copper-dark)); }
+.hero-ctas .btn-primary::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: linear-gradient(135deg, var(--gold), var(--copper));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.hero-ctas .btn-primary:is(:hover, :focus-visible) { transform: translateY(-2px); box-shadow: 0 16px 40px -14px rgba(200, 146, 66, 0.55); }
+.hero-ctas .btn-primary:is(:hover, :focus-visible)::before { transform: scaleX(1); }
+.hero-ctas .btn-ghost.on-dark { border-color: rgba(255, 255, 255, 0.45); }
+.hero-ctas .btn-ghost.on-dark::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: rgba(255, 255, 255, 0.14);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.hero-ctas .btn-ghost.on-dark:is(:hover, :focus-visible) { transform: translateY(-2px); color: #fff; border-color: #fff; box-shadow: 0 14px 36px -18px rgba(255, 255, 255, 0.3); }
+.hero-ctas .btn-ghost.on-dark:is(:hover, :focus-visible)::before { transform: scaleX(1); }
+.hero-ctas .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media (max-width: 640px) {
+  .hero-ctas { flex-direction: column; align-items: stretch; max-width: 340px; }
+  .hero-ctas .btn { justify-content: center; }
+}
+
+/* ---- reduced motion / animation failure: the finished hero, immediately ---- */
+html.no-anim .hero-lines, html.no-anim .hero-frame, .hero.hero-static .hero-lines, .hero.hero-static .hero-frame { display: none !important; }
+.hero.hero-static .hero-plate { clip-path: none !important; }
+.hero.hero-static :is(.hero-zoom, .hero-text, .hero-label, .hero-title .chi, .hero-accent, .hero-desc, .hero-ctas .btn) {
+  opacity: 1 !important; visibility: visible !important; transform: none !important;
+}
