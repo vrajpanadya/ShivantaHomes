@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/media/:path*", "destination": "https://shivantahomes.onrender.com/media/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
