@@ -286,11 +286,15 @@ export default function Home() {
                 <li key={h} data-reveal><Icon name="check" size={17} /> {h}</li>
               ))}
             </ul>
-            {overview.images[0] && (
-              <div className="overview-media" data-curtain>
-                <img src={overview.images[0]} alt="Shivanta Homes garden" style={{ height: 400, objectFit: 'cover', width: '100%' }} />
-              </div>
-            )}
+            {overview.images?.[0] && (
+  <div className="overview-media" data-curtain>
+    <img
+      src={overview.images[0]}
+      alt="Shivanta Homes garden"
+      style={{ height: 400, objectFit: 'cover', width: '100%' }}
+    />
+  </div>
+)}
           </div>
         </div>
       </section>
