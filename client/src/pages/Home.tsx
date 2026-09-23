@@ -835,7 +835,11 @@ export default function Home() {
       <Navbar />
 
       {/* ------------------------------- HERO ------------------------------- */}
-      <HeroSection data={l1 ? { ...hero, posterUrl: '' } : hero} play={ready} fallbackTitle={settings.projectName} />
+     <HeroSection
+  data={hero}
+  play={ready}
+  fallbackTitle={settings.projectName}
+/>
 
       {/* ----------------------------- OVERVIEW ----------------------------- */}
       <section className="section" id="overview">
